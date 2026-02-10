@@ -5,8 +5,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 8f;
     public float jumpForce = 12f;
     public Transform groundCheck;
-    public float groundCheckDistance = 0.12f;
-    public Vector2 groundCheckOffset = new Vector2(0f, -0.5f);
+    public float checkRadius = 0.2f;
+    // public Vector2 groundCheckOffset = new Vector2(0f, -0.5f);
     public LayerMask groundLayer;
 
     private Rigidbody2D rb;
@@ -19,15 +19,26 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        if(groundCheck == null)
+        {
+            groundCheck = transform;
+        }
     }
 
     void Update()
     {
         horizInput = Input.GetAxisRaw("Horizontal");
 
-        Vector2 rayOrigin = groundCheck != null ? (Vector2)groundCheck.position : (Vector2)transform.position + groundCheckOffset;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, groundCheckDistance, groundLayer);
-        isGrounded = hit.collider != null;
+        // Vector2 rayOrigin = groundCheck != null ? (Vector2)groundCheck.position : (Vector2)transform.position + groundCheckOffset;
+        // RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, groundCheckDistance, groundLayer);
+        // isGrounded = hit.collider != null;
+
+        bool wasGrounded = isGrounded;
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
+        Debug.Log(wasGrounded);
+        Debug.Log(groundCheck.position);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -43,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (animator != null)
         {
             animator.SetFloat("moveInput",Mathf.Abs(horizInput));
-            animator.SetBool("isGrounded",isGrounded);
+            animator.SetBool("isGrounded", isGrounded);
         }
     }
 
@@ -57,12 +68,12 @@ public class PlayerMovement : MonoBehaviour
         if (groundCheck != null)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * groundCheckDistance);
+            Gizmos.DrawLine(groundCheck.position, groundCheck.position + Vector3.down * checkRadius);
         }
         else
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(transform.position + (Vector3)groundCheckOffset, transform.position + (Vector3)groundCheckOffset + Vector3.down * groundCheckDistance);
+            // Gizmos.color = Color.yellow;
+            // Gizmos.DrawLine(transform.position + (Vector3)groundCheckOffset, transform.position + (Vector3)groundCheckOffset + Vector3.down * groundCheckDistance);
         }
     }
 }
