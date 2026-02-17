@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/MainMenu.unity
+    guid: ce8c3694dba7ffc44b118e20326e7187
+  - enabled: 1
+    path: Assets/Scenes/SettingsMenu.unity
+    guid: 65d83c66ab2f26d4394d06cfcd199a3f
+  - enabled: 1
+    path: Assets/Scenes/LittleGuyMoving.unity
+    guid: 4302766f7827fef4d8519d8797e69a9e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
