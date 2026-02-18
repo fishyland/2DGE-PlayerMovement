@@ -7,6 +7,10 @@ public class SceneLoader : MonoBehaviour
 
     private bool isPaused = false;
 
+    [SerializeField] GameObject myObject;
+    [SerializeField] GameObject mainMenuPanel;
+    private bool optionsToggle = false;
+
     private void Awake()
     {
         if (Instance == null)
