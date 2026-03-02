@@ -13,7 +13,8 @@ public class Collectible : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
-        {
+        {   
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.collectibleSFX);
             GameManager.Instance.AddCollectible();
             Destroy (gameObject);
         }
