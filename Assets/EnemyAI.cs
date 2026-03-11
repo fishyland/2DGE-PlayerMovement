@@ -75,6 +75,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
         else
         {
+           //Vector3 direction = (player.position - transform.position).normalized;
+            //moveDirection = direction;
             float direction = player.position.x>transform.position.x ? 1f: -1f;
             //? fancy way of doing if else, only if it needs one or the other
             Move(direction);
@@ -87,9 +89,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
             if(isMovingRight && transform.position.x >= rightBound.position.x)
             isMovingRight = false;
             else if(!isMovingRight && transform.position.x <= leftBound.position.x)
-            isMovingRight = true;
+           isMovingRight = true;
         }
-        Move(isMovingRight ? 1f: -1f);
+       //Move(isMovingRight ? 1f: -1f);
+
     }
     private void Move(float direction)
     {
